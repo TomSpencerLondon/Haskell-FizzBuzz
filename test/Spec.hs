@@ -14,5 +14,5 @@ spec = do
         prop "returns Fizz when number is multiple of 3 but not of 15" $
             forAll ((arbitrary :: Gen Int) `suchThat` (\a -> rem a 3 == 0 && rem a 15 /= 0)) $ \n -> fizzbuzz n `shouldBe` "Fizz"
         prop "return Buzz when number is multiple of 5 but not 15" $ forAll ((arbitrary :: Gen Int) `suchThat` (\n -> rem n 15 /= 0 && rem n 5 == 0)) $ \n -> fizzbuzz n `shouldBe` "Buzz"
-
+        prop "return the number when the number is not multiple of 3 or 5" $ forAll ((arbitrary :: Gen Int) `suchThat` (\n -> rem n 5 /= 0 && rem n 3 /= 0)) $ \n -> fizzbuzz n `shouldBe` show n
 
