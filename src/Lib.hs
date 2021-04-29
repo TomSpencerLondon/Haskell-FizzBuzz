@@ -7,5 +7,8 @@ someFunc :: IO ()
 someFunc = putStrLn "someFunc"
 
 fizzbuzz :: Int -> String
-fizzbuzz a = if rem a 15 == 0 then "FizzBuzz" else "Fizz"
+fizzbuzz a = case a of _
+                            | rem a 15 == 0 -> "FizzBuzz"
+                            | rem a 3 == 0 -> "Fizz"
+                            | otherwise -> "Buzz"
 
