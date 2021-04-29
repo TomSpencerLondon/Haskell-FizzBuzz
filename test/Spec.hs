@@ -10,11 +10,8 @@ spec:: Spec
 spec = do
     describe "A fizz buzz game" $ do
         prop "returns FizzBuzz when number is multiple of 15" $
-            forAll (multipleOf 15) $ \n -> fizzbuzz n `shouldBe` "FizzBuzz"
+            forAll ((arbitrary :: Gen Int) `suchThat` (\n -> rem n 15 == 0)) $ \n -> fizzbuzz n `shouldBe` "FizzBuzz"
         prop "returns Fizz when number is multiple of 3 but not of 15" $
-            forAll (multipleOf 3) $ \n -> fizzbuzz n `shouldBe` "Fizz"
+            forAll ((arbitrary :: Gen Int) `suchThat` (\a -> rem a 3 == 0 && rem a 15 /= 0)) $ \n -> fizzbuzz n `shouldBe` "Fizz"
 
-multipleOf x = do
-    n <- chooseInt (1, 100)
-    return $ n * x
 
